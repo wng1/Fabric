@@ -1,0 +1,44 @@
+The foundation of Microsoft Fabric is the Lakehouse, which is built on top of the OneLake scalable storage layer
+1. That uses Apache Spark
+2. SQL compute engine for big data processing
+Why Lakehouse? Because it is flexible and scalable storage of data lake and has the ability to query and analyze data of a datawarehouse.
+
+Lakehouses use SQL and SQL engines to process large-scale data and support machine learning or predictive modeling analytics.
+Lakehouse supports ACID transactions through Delta Lake formatted fables for data consistency and integrity.
+Scalable and maintains data consistency. 
+You can use Shortcuts.
+>>  https://app.fabric.microsoft.com
+>> Select "Synapse Data Engineering"
+>> Select "Workspaces"
+>> Create a new workspace name
+>> Select "Licensing mode in the Advanced section (Trail, Premium, Fabric)
+>> Create Lakehouse
+>> Upload a file  (https://raw.githubusercontent.com/MicrosoftLearning/dp-data/main/sales.csv)
+ 
+>> Files >> New Subfolder >> Data >> Upload >> Upload file >> sales.csv
+Load to Tables
+SELECT Item, SUM(Quantity * UnitPrice) AS Revenue
+FROM Sales
+GROUP BY Item
+ORDER BY Revenue DESC;
+
+CREATE A VISUAL QUERY >> New Visual Query >> Manage Columns >> Choose Columns >> SalesOrderNumber and SalesOrderLineNumber 
+Transform >> Group By 
+Group By: SalesOrderNumber
+New Column Name: LineItems
+Operation: Count Distrinct Values
+Column: SalesOrderLineNumber
+
+Create a report:
+
+At the bottom of the page, you see  Data, Query and Model. Select "Model" Tab 
+
+Views >> "frequently_run_queries", "long_running_queries", "exec_sessions_history" and "exec_requests_history"   (part of queryinsights)
+ 
+Report >> Data>> Item, Quantity
+
+Visualisation >> Clustered Data Chart
+
+Save Report as "Item Sales Report"
+
+https://microsoftlearning.github.io/mslearn-fabric/Instructions/Labs/01-lakehouse.html
