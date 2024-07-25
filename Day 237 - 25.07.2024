@@ -1,0 +1,7 @@
+Ingest Data with Dataflows Gen2 in Microsoft Fabric
+https://learn.microsoft.com/en-gb/training/modules/use-dataflow-gen-2-fabric/
+Data ingestion is crucial in analytics. MF DF offers dataflows for visually creating multi-step data ingestion and transformation using Power QUery Online.
+Data engineers spend significant time extracting, transforming, and loading data into a consumable format for downstream analytics.
+Data Pipeline > Copy Data  > Use preferred coding to ETL > Lakehouse > downstream to other destinations.  
+https://microsoftlearning.github.io/mslearn-fabric/Instructions/Labs/05-dataflows-gen2.html
+
