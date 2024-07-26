@@ -1,0 +1,78 @@
+COPY INTO dbo.Region
+FROM 'https://.......csv' WITH (
+	FILE_TYPE = 'CSV',
+	CREDENTIAL = (
+		IDENTITY = 'Shared Access Signature'
+		, SECRET = 'xxx'
+		)
+		,FIRSTROW = 2
+		)
+GO
+
+
+Load Data to Ingest, to store in Azure Blob Storage, Table = "Region" in fabric data warehouse
+
+(Staging Tables) - T-SQL - Temporay tables to perform data cleansing, data transformation, data validation.
+
+You can load various  data sources into a signle table for destination. 	
+
+(Data Loading) can be pefformed as a periodic batch process, in which inserts and updates to data warehouse, which can be regular intervals, (daily, weekly or monthly).
+
+1. Load, pre-cleansing or transformation as required into a data-lake
+2. Load the data from files into staging tables in the data warehouse
+3. Load the dimension tables from the dimension data into the staging tables, updating exisiting rows or inserting rows and generating surrogate key values as necessary.
+4. Load the fact tables from the fact data into staging tables, looking up the appropriate surrogate keys for related dimensions.
+5. Perform post-load optimization by updating indexes and table distrbution statistics.
+
+CREATE VIEW OrderSummaryView AS
+SELECT
+	d.Month,
+	c.Email,
+	SUM(s.Quantity) AS TotalOrders
+FROM 
+	factsales_gold s
+JOIN
+	dimdate_gold d ON s.OrderDate = d.OrderDate
+JOIN
+	dimcustomer_gold c ON s.CustomerID = c.CustomerID
+GROUP BY
+	d.Month, c.Email;
+=======================================================================
+Measures
+
+Month over Month Sales =
+VAR _CurrentMonthSales =
+	CALCULATE ( SUM (FactSalesOrder[SalesAmount]), DAYESYTD (DimDate[Date]))
+VAR _PreviousMonthSales =
+	CALCULATE ( SUM (FaceSalesOrder[SalesAmount]), 
+	DATESYTD (DATEADD(DimDate[Date], -1, MONTH))
+	)
+RETURN
+	DIVIDE ( _CurrentMonthSales - _PreviousMonthSales, _PreviousMonthSales, 0)
+
+https://learn.microsoft.com/en-gb/training/modules/get-started-data-warehouse/5-model-data
+
+Monitoring activities in your data warehouse is crucial to ensure optimal performance, efficient resource utilization, and security. 
+
+It helps you identify issues, detect anomalies, and take action to keep the data warehouse running smoothly and securely.
+
+You can use dynamic managemtn view (DMVs) to monitor connection, sessions, and request status to see live SQL query lifecycle insights. 
+
+sys.dm_exec_connections
+sys.dm_exec_sessions
+sys.dm_exec_requests
+
+SELECT request_id, session_id, start_time, total_elapsed_time
+    FROM sys.dm_exec_requests
+    WHERE status = 'running'
+    ORDER BY total_elapsed_time DESC;
+
+SELECT login_name
+    FROM sys.dm_exec_sessions
+    WHERE 'session_id' = 'SESSION_ID WITH LONG-RUNNING QUERY';
+
+KILL 'SESSION_ID WITH LONG-RUNNING QUERY';
+
+https://microsoftlearning.github.io/mslearn-fabric/Instructions/Labs/06-data-warehouse.html
+
+
