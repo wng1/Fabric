@@ -1,0 +1,84 @@
+https://learn.microsoft.com/en-gb/training/modules/get-started-kusto-fabric/2-define-real-time-analytics 
+Analysis of real-time data streams is a critical capabiity for any modern data analytics solution. You can use the Real-Time Intelligence capabilities of Microsoft Fabric to: ingest, query, process streams of data.
+Microsoft Fabric Real-Time Intellgience - providing a streamlined workflow from data loading to visualization.
+Kusto Query Language 
+(Eventhouse, KQL Database, KQL Queryset, Real-Time Dashboard, Eventstream)
+.create table sales(
+	SalesOrderNumber: string,
+	SalesOrderLineItem: int,
+	OrderDate: datetime,
+	CustomerName: string,
+	EmailAddress: string,
+	Item: string,
+	Quantity: int,
+	UnitPrice: int,
+	TaxAmount: real)
+
+.ingest into table sales 'http://...'
+with (ignoreFirstRecord = true)
+
+RETRIEVE DATA FROM A TABLE
+
+sales
+
+sales | take 5
+
+Filter with the "where" clause
+
+sales | where Item contains 'Mountain-100'
+
+sales I where OrderDate between ((now(-1d) .. now())
+
+Sort query results
+sales | where Item contains "Mountain-100"
+| sort by OrderDate desc
+
+https://learn.microsoft.com/en-gb/training/modules/get-started-kusto-fabric/5-exercise-use-kusto-query-data-onelake
+
+https://learn.microsoft.com/en-gb/training/modules/explore-event-streams-microsoft-fabric/
+
+Tumbling windows divides incoming events into fixed and nonoverlapping intervals based on arrival time.
+
+Sliding Window takes events into fixed and overlapping intervals based on time and divides them.
+
+Session windows divides events into variables and non-overlapping intervals that are based on a gap of lack of activity.
+
+hopping windows are different from tumbling windows as they model scheduled overlapping window
+
+snapshot windows 
+
+window duration
+https://microsoftlearning.github.io/mslearn-fabric/Instructions/Labs/09-real-time-analytics-eventstream.html
+
+
+
+https://learn.microsoft.com/en-gb/training/modules/load-data-into-microsoft-fabric-data-warehouse/2-explore-data-load-strategies
+
+Load data using SQL
+
+COPY my_table
+FROM 'htttps://.csv', 
+            'https://.csv'
+WITH (
+	FILE_TYPE = 'CSV',
+	CREDENTIAL=(IDENTITY = 'Shared Access Signature', SECRET='SAS')
+	FIELDTERMINATOR = '|'
+
+COPY INTO test_parquet
+FROM 'https://.partquest'
+WITH(CREDENTIAL=(IDENTITY = 'Shared Access Signature', SECRET='SAS'))
+
+
+##Create a Table
+CREATE TABLE [analysis.warehouse].[dbo].[combined_data]
+AS
+SELECT
+FROM [sales_warehouse].[dbo].[sales_data] SALES
+INNER JOIN [social_lakehouse].[dbo].[social_data] social
+ON sales.[product_id] = social.[product_id];
+
+https://microsoftlearning.github.io/mslearn-fabric/Instructions/Labs/06a-data-warehouse-load.html 
+
+https://learn.microsoft.com/en-gb/training/modules/query-data-warehouse-microsoft-fabric/5-exercise-query-data-warehouse-microsoft-fabric
+
+
