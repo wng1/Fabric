@@ -1,0 +1,37 @@
+https://microsoftlearning.github.io/mslearn-fabric/Instructions/Labs/06b-data-warehouse-query.html
+
+SELECT D.MonthName, COUNT(*) AS TotalTrips, SUM(T.TotalAmount) AS TotalRevneue
+FROM dbo.Trip AS T
+JOIN dbo.[Date] AS D
+ON T.[DateID]=D.[DateID]
+GROUP BY D.MonthName;
+----------------------------------------------------------
+SELECT D.DayName, AVG(T
+
+----------------------------------------------------------
+Monitor
+https://learn.microsoft.com/en-gb/training/modules/monitor-fabric-data-warehouse/02-capacity-metrics
+Each time your action you perform in Fabric, resource can cosnume CU (capactiy units), for which your organization is billed.
+https://microsoftlearning.github.io/mslearn-fabric/Instructions/Labs/06c-monitor-data-warehouse.html 
+
+SELECT * FROM sys.dm_exec_connections;
+SELECT * FROM sys.dm_exec_sessions;
+SELECT * FROM sys.dm_exec_requests;
+
+Data Masking
+-- For Email
+ALTER TABLE Customers
+ALTER COLUMN Email ADD MASKED WITH (FUNCTION = 'email()');
+
+-- For PhoneNumber
+ALTER TABLE Customers
+ALTER COLUMN PhoneNumber ADD MASKED WITH (FUNCTION = 'partial(3,"XXX-XXX-",4)');
+
+-- For CreditCardNumber
+ALTER TABLE Customers
+ALTER COLUMN CreditCardNumber ADD MASKED WITH (FUNCTION = 'partial(4,"XXXX-XXXX-XXXX-",4)');
+
+
+https://microsoftlearning.github.io/mslearn-fabric/Instructions/Labs/06d-secure-data-warehouse.html
+
+
