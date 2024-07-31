@@ -1,0 +1,65 @@
+https://learn.microsoft.com/en-us/training/modules/perform-data-analysis-azure-databricks/03-data-exploration-tools 
+data =[ ("Alice", 34), ("Bob", 40), ("Tom", 30)]
+columns = ["Name", "Age"}
+df = spark.createDataFrame(data, columns)
+
+filtered_df = df.filter(df["Age"] > 30)
+df.createOrReplaceTempView("people")
+sql_df = spark.sql("SELECT Name, Age FROM people WHERE age > 30")
+
+Spark DataFrame
+data = [("Alice", 30), ("John", 30)]
+columns = ["Name", "Age"]
+df = spark.createDataFrame(data, columns)
+
+#select columns
+df.select("Name").show()
+
+#Filter rows
+df.filter(df["Age"] > 30).show()
+
+#Group by and aggregate
+df.groupBy("Age").count().show()
+
+============================================
+import pandas as pd
+
+data = {'Name': ['Alice', 'Bob', 'Cathy', David'],
+              'Age':[34,45,29,23]}
+
+print(df[["Name"]])
+print(df(df["Age"] > 30])
+print(df.groupby("Age").size())
+
+https://learn.microsoft.com/en-us/training/modules/perform-data-analysis-azure-databricks/04-data-analysis
+
+https://microsoftlearning.github.io/mslearn-databricks/Instructions/Exercises/LA-02-Explore-data.html
+
+%sh
+rm -r /dbfs/spark_lab
+mkdir /dbfs/spark_lab
+
+wget -0 /dbfs/spark_lab/2019.csv
+wget -0/dbfs/spark_lab/2020.csv 
+
+==============================================
+Data pipelines with Delta Live Tables
+https://learn.microsoft.com/en-us/training/modules/build-data-pipeline-with-delta-live-tables/1-introduction
+
+Delta Live Tables is a framework that simplifies the construction and management of data piplines fo  big data and machine learning applications.
+
+You define the data transformations using SQL or Python to perform on your data and DLT manages task orchestration, monitoring, data quality, and error handling.
+
+DLT have several features for streamling dats engineering tasks, and for enhancing data infrastructure reliability. 
+
+You can manage data quality with Delta Live Tables expectations directly in your pipelines. 
+
+DLT expectations are dataset declarations that apply data quality checks on each record passing through a query. DLT also has features like lineage tracking, and performance optimizations.
+
+https://learn.microsoft.com/en-us/training/modules/build-data-pipeline-with-delta-live-tables/3-data-ingestion-and-integration
+
+https://learn.microsoft.com/en-us/training/modules/build-data-pipeline-with-delta-live-tables/4-real-time-processing 
+
+Monitor - DLT for real time data processing is to monitor and manage pipeline health. 
+
+
