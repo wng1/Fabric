@@ -1,0 +1,34 @@
+https://learn.microsoft.com/en-gb/training/modules/query-data-kql-database-microsoft-fabric/2-get-started-with-kql-queries 
+Query data in a KQL database in MF
+KQL Queryset
+FIPS
+
+SELECT CASE
+	WHEN ___________ IS NULL OR __________ = '' Then 'Unidentified'
+	ELSE _________
+       END AS Borough,
+       SUM(trip_distance) AS [Total Trip Distance]
+FROM Trips
+GROUP BY CASE
+	WHEN ___________ IS NULL OR ___________ = '' THEN 'Unidentified'
+	ELSE ____________
+        END;
+
+Trips
+| summarize ['Total Trip Distance']=sum(trip_distance) by groupByExpression1=iff((isnull(pickup_boroname) or (pickup_boroname == "")), "Unidentified", pickup_boroname)
+| project Borough=groupByExpression1, ['Total Trip Distance']
+===========================================================================
+KQL - can improve query performance and prevent data quality issues viewed on the data consumer side. 
+
+Trips
+| where ((pickup_datetime >= todatetime("2014-10-01")) and ((pickup_datetime < todatetime("2014-11-01")))
+| project passenger_count, trip_distance, fare_amount
+===========================================================================
+Trips
+| where (payment_type == 'CRD' and (pickup_datetime >=todatetime("2014-10-01")) and
+(pickupdatetime < todatetime("2024-10-11"))
+| project passenger_count, trip_distance, fare_amount
+===========================================================================
+https://learn.microsoft.com/en-gb/training/modules/query-data-kql-database-microsoft-fabric/3-kql-best-practices
+
+https://learn.microsoft.com/en-gb/training/modules/query-data-kql-database-microsoft-fabric/4-advanced-features
