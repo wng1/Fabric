@@ -1,0 +1,47 @@
+https://learn.microsoft.com/en-gb/training/modules/create-real-time-dashboards-microsoft-fabric/
+
+Real-Time Dashbaord for Fabric
+Analyst at a large retail company. Tasked with monitoring real-time data on product sales, customer behaviour, and market trends.
+1) Workspace with Fabric enabled
+2) KQL database with data
+ 
+ 
+ 
+ 
+ 
+https://clustername.kusto.windows.net
+Select Data Source
+Click Create
+ 
+ 
+MyStockData1
+| where securityType = "commonstock"
+| summarize ["Average Last Sale Price"] = avg(todecimal(lastSalePrice)) by symbol
+| project symbol, ["Average Last Sale Price"]
+ 
+
+Apply Changes
+ 
+ 
+Locate > Parameters 
+ 
+ 
+ 
+
+
+ 
+
+
+ 
+ 
+
+ 
+https://learn.microsoft.com/en-gb/training/modules/create-real-time-dashboards-microsoft-fabric/4-real-time-dashboards-best-practices
+
+https://microsoftlearning.github.io/mslearn-fabric/Instructions/Labs/13-real-time-dashboards.html
+
+
+
+
+
+
