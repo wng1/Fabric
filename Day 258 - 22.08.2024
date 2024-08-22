@@ -1,0 +1,31 @@
+https://learn.microsoft.com/en-gb/training/paths/work-semantic-models-microsoft-fabric/
+Designing reports is just more than just connecting to data.
+Understanding semantic models and strategies for scalability and optimization are key to a successful enterprise implementation.
+Data Modelling, best practices
+Power BI Premium (working with large data)
+40GB dataset, 80GB memory available, 100GB memory
+---------------------
+Use DirectQuery when data sources store large volume of data and/or reports needs to deliver real-time data.
+Use Composite Model if you need to:
+1) Boost query performance of a DirectQuery model
+2) Deliver near real-time query results from an import model
+3) Extend a Power BI dataset (or Azure Analysis Service model) with other data
+---------------------
+Best practices
+1) Start with import mode
+2) Only bring data you need
+3) Avoid wide tables
+4) Use a star schema in Power BI
+5) Reduce the usage of calculated columns
+6) Avoid high cardinality columns
+7) USe appropriate types
+8) Limit the use of bi-directional filters on relationships
+9) Disable auto date/time
+10) Disable attribute hierarchies for non-attribute columns
+11) If querying relationship database, query database views rather the tables
+12) Views should not contain logic. only SLECT statement from ta table
+13) Consider partitioning and incremental refresh to avoid loading data you don't need to
+14) Query Folding
+https://learn.microsoft.com/en-gb/training/modules/understand-scalability-power-bi/3-implement-data-modeling-best-practices
+
+Large PowerBI Premium (10GB after compression)
