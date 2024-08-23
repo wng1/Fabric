@@ -1,0 +1,53 @@
+https://learn.microsoft.com/en-gb/training/modules/understand-scalability-power-bi/1-introduction?source=learn
+
+Scalability - requires Flexiblity, Data Growth, Reduced Complexity
+DirectQuery - data source for large volume data for report to deliver near real-time data
+Use composite model when you need to:
+1) boost the query performance of a DirectQuery model
+2) deliver near real-time query results from an import model
+3) extend a powerBI dataset (or Azure Analysis Service model) with other data
+---------------------------------------------------------------------------------------------------------------
+Dimensions table describes business entities, the things you model. Like Products, people, places and concept including time.
+Fact table describes observations and events such as Sales orders, stock balances, exchange rates, or temperature readings.
+---------------------------------------------------------------------------------------------------------------
+DirectQuery tables don't require refresh, they're well suited for large data stores, like a data warehouse. It's impractical and inefficient, if not impossible, to import an entire datawarehouse into a model.
+When the source data changes rapidly and users need to see current data, a DirectQuery model can deliver near real-time query results.
+---------------------------------------------------------------------------------------------------------------
+Enforce RLS on source database, instead of replicating RLS rules in your Power BI model.
+---------------------------------------------------------------------------------------------------------------
+Data sovereignty restrictions
+If your organization has security policies that restrict data leaving their premises, then it isn’t possible to import data. A DirectQuery model that connects to an on-premises data source may be appropriate. (You can also consider installing Power BI Report Server for on-premises reporting.)
+---------------------------------------------------------------------------------------------------------------
+DirectQuery model limitations
+There are many limitations related to DirectQuery models that you must bear in mind. Here are the main limitations:
+    Not all data sources are supported. Typically, only major relational database systems are supported. Power BI datasets and Azure Analysis Services models are supported too.
+    All Power Query (M) transformations are not possible, because these queries must translate to native queries that are understood by source systems. So, for example, it’s not possible to use pivot or unpivot transformations.
+    Analytic query performance can be slow, especially if source systems aren’t optimized (with indexes or materialized views), or there are insufficient resources for the analytic workload.
+    Analytic queries can impact on source system performance. It could result in a slower experience for all workloads, including OLTP operations.
+https://learn.microsoft.com/en-gb/training/modules/choose-power-bi-model-framework/4-determine-when-to-develop-directquery-model
+https://learn.microsoft.com/en-gb/training/modules/choose-power-bi-model-framework/5-determine-when-to-develop-composite-model 
+
+
+https://learn.microsoft.com/en-gb/training/modules/create-manage-scalable-power-bi-dataflows/1-introduction
+https://learn.microsoft.com/en-gb/training/modules/create-manage-scalable-power-bi-dataflows/2-define-use-cases-for-dataflows 
+Data transformation should always be done as close to the source as possible. 
+Data Factory wranggling is highly scalable, but only a few sources are supported, and functions are limited supported, but can be retrieved for many destinations.
+
+Create Data Flow (Power BI)
+
+ 
+Add Tables
+ 
+
+ 
+ 
+ 
+ 
+ 
+
+ 
+
+https://learn.microsoft.com/en-us/power-bi/transform-model/dataflows/dataflows-create
+
+Best practices
+https://learn.microsoft.com/en-gb/training/modules/create-manage-scalable-power-bi-dataflows/4-implement-best-practices
